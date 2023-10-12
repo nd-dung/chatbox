@@ -1,0 +1,175 @@
+version: "2.0"
+
+nlu:
+# Xử lý từ đồng nghĩa
+- synonym: Xanh
+  examples: |
+    - xanh
+    - chàm
+    - cham
+
+
+- synonym: Đỏ
+  examples: |
+    - Đỏ
+    - do
+
+- synonym: Vàng
+  examples: |
+    - Vàng
+    - vang
+
+- synonym: Đen
+  examples: |
+    - Black
+    - den
+    - đen
+
+# Lookup table
+- lookup: color
+  examples: |
+    - Đỏ
+    - Vàng
+    - Xanh
+    - Đen
+    - Trắng
+
+- lookup: type_product
+  examples: |
+    - Bút bi
+    - Thước kẻ
+    - Vở
+    - Máy tính
+    - Bàn học
+    - Tập viết
+    - Sách giáo khoa
+    - Sách
+    - Sách tham khảo
+
+- lookup: info_product
+  examples: |
+    - màu
+    - hãng
+    - xuất xứ
+    - bảo hành
+    - số trang
+    - kích thước
+    - đối tượng
+    - tác giả
+    - nhà xuất bản
+    - chất liệu
+
+- lookup: brand
+  examples: |
+    - Thiên Long
+    - Campus
+    - Hồng Hà
+    - Axeon
+    - KLONG
+    - Guden
+
+- lookup: size
+  examples: |
+    - A2
+    - A3
+    - A4
+    - A5
+    - 10cm
+    - 20cm
+
+- lookup: material
+  examples: |
+    - Nhôm
+    - Đồng
+    - Gỗ
+    - Nhựa
+    - Giấy
+    - Giấy chống lóa
+
+- lookup: origin
+  examples: |
+    - Việt Nam
+    - Trung Quốc
+
+- lookup: specifications
+  examples: |
+    - Dung tích
+    - Khổ giấy
+    - Ngòi bút
+
+# Intent
+- intent: greet
+  examples: |
+    - Xin chào
+    - hi
+    - chào shop
+    - hi shop
+    - hello
+
+- intent: bot_challenge
+  examples: |
+    - Bạn có thể làm gì ?
+    - b giúp được gì 
+    - bạn là bot à
+
+- intent: ask_for_product
+  examples: |
+    - Shop co [but chi](type_product:Bút chì) mau [vang]{"entity":"color", "value":"Vàng"} không ?
+    - Shop có [bút](type_product) màu [trắng]{"entity":"color"}
+    - Tim [vo](type_product:Vở) mau [chàm]{"entity":"color", "value":"Xanh"}
+    - Có [vở](type_product) cỡ [A3]{"entity":"size", "value":"A3"}
+    - Gợi ý cho tổi [vở](type_product) [A4]{"entity":"size"}
+    - Cần tìm [vở](type_product) của [Hồng Hà]{"entity":"brand"}
+    - [bút](type_product) [Axeon]{"entity":"brand"}
+    - Shop có [bút](type_product) [thiên long]{"entity":"brand"} không
+    - Có [vở](type_product) của hãng [Campus]{"entity":"brand"} không 
+    - Co [but](type_product:bút) mau [den]{"entity":"color", "value":"Đen"} khong ?
+    - tìm [bút](type_product) của [Việt Nam]{"entity":"origin"}
+    - tôi đang tìm [vở](type_product) có [giấy chống lóa]{"entity":"material"}
+
+
+- intent: ask_info_product
+  examples: |
+    - Sản phẩm có những [màu]{"entity":"info_product",  "value":"color"} nào
+    - Chính sách [bảo hành]{"entity":"info_product", "value":"guarantee"}
+    - [sản xuất]{"entity":"info_product",  "value":"origin"} ở đâu
+    - của [hãng]{"entity":"info_product", "value":"brand"} nào
+
+- intent: mua_hang
+  examples: |
+    - Tôi mốn đặt hàng
+    - Đặt hàng
+    - \mua [BUT1](ma_sp)
+
+- intent: select_product
+  examples: |
+    - \select [BUT1](ma_sp)
+
+- intent: inform_mua_hang
+  examples: |
+    - [1](so_luong)
+    - [-2](so_luong)
+    - [Đỏ](phan_loai)
+    - màu [Vàng](phan_loai)
+    - cho anh màu [den](phan_loai:Đen) nhé
+    - sp_pl [BUT1_PL1](sp_phan_loai)_phan_loai [Đỏ](phan_loai)
+
+- intent: inform_mua_hang
+  examples: |
+    - [Ok](affirm:dong_y)
+    - [Đồng ý](affirm:dong_y)
+
+- intent: ask_so_luong
+  examples: |
+    - Sản phẩm này còn hàng không ?
+    - Còn hàng không
+    - Còn không 
+    - Còn bao nhiêu
+    - Màu [đỏ](phan_loai) còn bao nhiêu
+
+- intent: ask_price
+  examples: |
+    - Giá sao 
+    - bao nhiêu
+    - bao tiền
+    - giá cả thế nào 
