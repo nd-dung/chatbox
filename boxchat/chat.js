@@ -5,9 +5,6 @@ $(document).ready(() => {
         }else{
             $("#send-button").addClass("active")
         }
-
-
-
     });
 
     $('#input-field').keypress(function (e) {
